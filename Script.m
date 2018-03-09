@@ -26,6 +26,29 @@ arrivals = [0.1, 10, 0.1, 10];
 % exponentially distributed mean service times
 service_times = [2,1,2,1];
 
+% Say, the transition table is
+P = [0 1 0 0; 0 0 1 0; 0 0 0 1; 1 0 0 0];
+
+% Below is used to calculate cross-correlation between the inter-arrival
+% and service time
+[V D] = eig( P.' );
+
+% st represents the State Transition Table
+st = V(:,1).';
+
+st = abs(st)./sum(abs(st));
+
+lamb_neg_1 = sum(st.*(arrivals.^-1));
+
+mean_service_time = sum(st.*service_times);
+
+numerator = abs(sum(st.*(arrivals-lamb_neg_1).*(service_times-mean_service_time)));
+
+denominator = abs((sum(st.*((arrivals.^-1-lamb_neg_1).^2))*sum(st.*((service_times-mean_service_time).^2)))^0.5);
+
+corres = numerator/denominator
+
+
 % compute the stationary distribution of the above example
 syms a  a0 b b0 c c0 d d0 positive;
  
