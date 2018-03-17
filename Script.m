@@ -25,7 +25,7 @@ N = 4;
 % markovian arrival processes (poisson)
 arrivals = [0.1, 10, 0.1, 10];
 % exponentially distributed mean service times
-service_times = [2,2,1,1];
+service_times = [1,2,1,2];
 
 % Say, the transition table is
 P = [0 1 0 0; 0 0 1 0; 0 0 0 1; 1 0 0 0];
@@ -53,12 +53,12 @@ end
 p = 0.297 .* r;
 
 figure;
-scatter(p,waiting_time(2,:),'filled');
+scatter(p,waiting_time(1,:),'filled');
 hold on;
-scatter(p, waiting_time(3,:));
+scatter(p, waiting_time(2,:));
 xlabel("p - Traffic Intensity w/ system in steay state")
 ylabel("Waiting as a function of p");
-title("Zero Correlation : Waiting Time in Queue vs Traffic Intensity - Observance of the effect of the presence of Auto-Correlation");
+title("Negative Correlation : Waiting Time in Queue vs Traffic Intensity - Observance of the effect of the presence of Auto-Correlation");
 
 %%
 figure;
